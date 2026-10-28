@@ -1,0 +1,94 @@
+/* ===== RESET & VARIABLES ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-deep: #080a0e;
+  --bg-surface: #0e1118;
+  --bg-card: rgba(18, 22, 32, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --accent: #5f9ea0;
+  --accent-soft: #3d6e70;
+  --accent-glow: rgba(95, 158, 160, 0.35);
+  --text-primary: #eef2f5;
+  --text-secondary: #a8b4c0;
+  --text-muted: #6b7a8a;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --transition-smooth: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  --transition-fast: 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --nav-height: 70px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--accent-soft); border-radius: 10px; }
+
+/* Custom cursor (desktop) */
+@media (pointer: fine) {
+  body { cursor: none; }
+  .cursor-dot, .cursor-outline {
+    pointer-events: none;
+    position: fixed;
+    top: 0; left: 0;
+    border-radius: 50%;
+    z-index: 9999;
+    will-change: transform;
+  }
+  .cursor-dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent-glow);
+    transform: translate(-50%, -50%);
+    transition: width .15s, height .15s, background .15s;
+  }
+  .cursor-outline {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(95, 158, 160, 0.35);
+    transform: translate(-50%, -50%);
+    transition: width .3s, height .3s, border-color .3s, background .3s;
+    backdrop-filter: blur(1px);
+  }
+  .cursor-dot.hover, .cursor-outline.hover {
+    width: 48px; height: 48px;
+    border-color: rgba(95, 158, 160, 0.7);
+    background: rgba(95, 158, 160, 0.08);
+  }
+}
+
+/* Background canvas */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+/* Utilities */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}

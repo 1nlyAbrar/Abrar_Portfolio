@@ -1,0 +1,52 @@
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes floatNode {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes spinSlow { to { transform: rotate(360deg); } }
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.08); }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .9s cubic-bezier(0.23,1,0.32,1), transform .9s cubic-bezier(0.23,1,0.32,1);
+  will-change: transform, opacity;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Loader */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-deep);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .8s cubic-bezier(0.23,1,0.32,1), visibility .8s;
+}
+.loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader-inner {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 2px solid rgba(95,158,160,0.15);
+  border-top-color: var(--accent);
+  animation: spin .9s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
